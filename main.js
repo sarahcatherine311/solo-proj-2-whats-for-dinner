@@ -62,80 +62,69 @@ var desserts = [
 letsCookButton.addEventListener('click', letsCook);
 
 radioButton1.addEventListener('click', function () {
-    sideRadioButton.checked = true
-})
+  sideRadioButton.checked = true;
+});
 
 radioButton2.addEventListener('click', function () {
-    mainDishRadioButton.checked = true
-})
+  mainDishRadioButton.checked = true;
+});
 
 radioButton3.addEventListener('click', function () {
-    dessertRadioButton.checked = true
-})
+  dessertRadioButton.checked = true;
+});
 
 radioButton4.addEventListener('click', function () {
-    entireMealRadioButton.checked = true
-})
+  entireMealRadioButton.checked = true;
+});
 
 function getRandomIndex(array) {
-    return Math.floor(Math.random() * array.length);
-}
+  return Math.floor(Math.random() * array.length);
+};
 
 function hide(element) {
-    element.classList.add('hidden');
-}
+  element.classList.add('hidden');
+};
   
 function show(element) {
-    element.classList.remove('hidden');
-}
+  element.classList.remove('hidden');
+};
 
-function getRandomSide() {
-    return getRandomIndex(sides);
-}
+function uncheckRadioButtons() {
+  sideRadioButton.checked = false;
+  mainDishRadioButton.checked = false;
+  dessertRadioButton.checked = false;
+  entireMealRadioButton.checked = false;
+};
 
-function getRandomMain() {
-    return getRandomIndex(mains);
-}
+function makeRecipeTitleBig() {
+  recipeTitle.classList.add('recipe-title');
+  recipeTitle.classList.remove('entire-recipe-title');
+};
 
-function getRandomDessert() {
-    return getRandomIndex(desserts);
-}
-
-function uncheckRadioButtons () {
-    sideRadioButton.checked = false
-    mainDishRadioButton.checked = false;
-    dessertRadioButton.checked = false;
-    entireMealRadioButton.checked = false;
-}
-
-function makeRecipeTitleBig () {
-    recipeTitle.classList.add('recipe-title');
-    recipeTitle.classList.remove('entire-recipe-title')
-}
-
-function makeRecipeTitleSmall () {
-    recipeTitle.classList.remove('recipe-title');
-    recipeTitle.classList.add('entire-recipe-title')
-}
+function makeRecipeTitleSmall() {
+  recipeTitle.classList.remove('recipe-title');
+  recipeTitle.classList.add('entire-recipe-title');
+};
 
 function letsCook() {
-    hide(cookpot);
-    show(currentRecipe);
+  hide(cookpot);
+  show(currentRecipe);
 
-    if(sideRadioButton.checked === true) {
-        recipeTitle.innerText = `${sides[getRandomSide()]}!`;
-        makeRecipeTitleBig()
-    } else if(mainDishRadioButton.checked === true) {
-        recipeTitle.innerText = `${mains[getRandomMain()]}!`;
-        makeRecipeTitleBig()
-    } else if(dessertRadioButton.checked === true) {
-        recipeTitle.innerText = `${desserts[getRandomDessert()]}!`;
-        makeRecipeTitleBig()
-    } else if(entireMealRadioButton.checked === true) {
-        recipeTitle.innerText = `${mains[getRandomMain()]} with a side of ${sides[getRandomSide()]} and ${desserts[getRandomDessert()]} for dessert!`;
-        makeRecipeTitleSmall()
-    } else {
-        recipeTitle.innerText = "Please make a selection."
-    }
-    uncheckRadioButtons()
-}
+  if (sideRadioButton.checked) {
+    recipeTitle.innerText = `${sides[getRandomIndex(sides)]}!`;
+    makeRecipeTitleBig();
+  } else if (mainDishRadioButton.checked) {
+    recipeTitle.innerText = `${mains[getRandomIndex(mains)]}!`;
+    makeRecipeTitleBig();
+  } else if (dessertRadioButton.checked) {
+    recipeTitle.innerText = `${desserts[getRandomIndex(desserts)]}!`;
+    makeRecipeTitleBig();
+  } else if (entireMealRadioButton.checked) {
+    recipeTitle.innerText = `${mains[getRandomIndex(mains)]} with a side of ${sides[getRandomIndex(sides)]} and ${desserts[getRandomIndex(desserts)]} for dessert!`;
+    makeRecipeTitleSmall();
+  } else {
+    recipeTitle.innerText = "Please make a selection.";
+  };
+
+  uncheckRadioButtons();
+};
